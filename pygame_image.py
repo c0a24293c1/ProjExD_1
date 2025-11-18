@@ -9,7 +9,7 @@ def main():
     pg.display.set_caption("はばたけ！こうかとん")
     screen = pg.display.set_mode((800, 600))
     clock  = pg.time.Clock()
-    bg_img = pg.image.load("fig/pg_bg.jpg")
+    bg_img = pg.image.load("fig/pg_bg.jpg") #練習1
     tmr = 0
     kk_img = pg.image.load("fig/3.png") #練習3
     kk_img = pg.transform.flip(kk_img, True, False) #練習3
@@ -19,7 +19,9 @@ def main():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
-        key_lst = pg.key.get_pressed()
+
+        kk_rct.move_ip((-1, 0))
+        key_lst = pg.key.get_pressed() #練習10↓
         if key_lst[pg.K_UP]:
             kk_rct.move_ip((0, -1))
         if key_lst[pg.K_DOWN]:
@@ -27,8 +29,7 @@ def main():
         if key_lst[pg.K_LEFT]:
             kk_rct.move_ip((-1, 0))
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((+1, 0))
-        if event.type == pg.QUIT: return
+            kk_rct.move_ip((+2, 0)) #練習10↑
 
         screen.blit(bg_img, [-tmr, 0]) #練習5
         screen.blit(bg_img_flip, [-tmr + 1600, 0]) #練習7,練習8
@@ -38,7 +39,7 @@ def main():
         tmr += 1 
 
         if tmr == 3200: #練習9
-            tmr = 0       
+            tmr = 0     
         clock.tick(200) #練習6
 
 
