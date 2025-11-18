@@ -20,16 +20,22 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        kk_rct.move_ip((-1, 0))
-        key_lst = pg.key.get_pressed() #練習10↓
-        if key_lst[pg.K_UP]:
-            kk_rct.move_ip((0, -1))
-        if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip((0, +1))
-        if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip((-1, 0))
+        key_lst = pg.key.get_pressed()
+        delta = [-1, 0] # 演習1:デフォルトは左移動
+        
+        # 左右の移動量 (X方向) を計算
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((+2, 0)) #練習10↑
+            delta[0] = +1 # 演習1:右キーで右に進む
+        elif key_lst[pg.K_LEFT]:
+            delta[0] = -2
+
+        # 上下の移動量 (Y方向) を計算
+        if key_lst[pg.K_UP]:
+            delta[1] = -1
+        if key_lst[pg.K_DOWN]:
+            delta[1] = +1
+            
+        kk_rct.move_ip(tuple(delta)) # 演習2: move_ipは1回だけ実行
 
         screen.blit(bg_img, [-tmr, 0]) #練習5
         screen.blit(bg_img_flip, [-tmr + 1600, 0]) #練習7,練習8
